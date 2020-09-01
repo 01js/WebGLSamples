@@ -13,11 +13,7 @@ export const loadShader = (gl: WebGLRenderingContext, type: number, source: stri
 }
 
 
-export const initProgram = (gl: WebGLRenderingContext): WebGLProgram | null => {
-  const a: HTMLElement | null = document.getElementById('vertex-shader')
-  const b: HTMLElement | null = document.getElementById('fragment-shader')
-  const vertexShaderSource = a ? a.innerText: '';
-  const fragShaderSource =  b ? b.innerText: '';
+export const initProgram = (gl: WebGLRenderingContext, vertexShaderSource: string, fragShaderSource: string): WebGLProgram | null => {
   
   const vertexShader: WebGLShader = loadShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
   const fragShader: WebGLShader = loadShader(gl, gl.FRAGMENT_SHADER, fragShaderSource);

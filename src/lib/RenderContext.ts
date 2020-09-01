@@ -1,13 +1,17 @@
-import { initGL } from './boot/initGL';
-export default class RenderContext {
-  static gl: WebGLRenderingContext;
+import { initProgram } from './boot/initProgram';
 
-  static init() {
-    if (RenderContext.gl) return;
-    const gl = initGL();
+export default class RenderContext {
+  gl: WebGLRenderingContext | any;
+  program: WebGLProgram | any;
+  constructor(gl: WebGLRenderingContext | any, vertexShaderSource: string, fragShaderSource: string) {
+    this.gl = gl;
+    this.program = initProgram(gl, vertexShaderSource, fragShaderSource)
+    this.gl.useProgram(this.program)
   }
-  static getGL(): WebGLRenderingContext {
-    RenderContext.init();
-    return RenderContext.gl;
+  getGL(): WebGLRenderingContext {
+    return this.gl;
+  }
+  getProgram(): WebGLProgram {
+    return this.program
   }
 }
